@@ -1,0 +1,25 @@
+name: 24/7 Heavy Rain Live Stream
+
+on:
+  schedule:
+    - cron: '0 */5 * * *' 
+  workflow_dispatch:
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    - name: Run Live Stream
+      env:
+        STREAM_SECRET: ${{ secrets.STREAM_SECRET }}
+      run: |
+        chmod +x stream.sh
+        timeout 320m ./stream.sh || true
