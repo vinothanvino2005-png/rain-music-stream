@@ -2,7 +2,7 @@ name: 24/7 Heavy Rain Live Stream
 
 on:
   schedule:
-    - cron: '0 */5 * * *' 
+    - cron: '0 */3 * * *' 
   workflow_dispatch:
 
 jobs:
@@ -22,4 +22,4 @@ jobs:
         STREAM_SECRET: ${{ secrets.STREAM_SECRET }}
       run: |
         chmod +x stream.sh
-        timeout 320m ./stream.sh || true
+        timeout 190m ./stream.sh || true
